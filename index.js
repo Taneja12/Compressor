@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
 });
 
 const storage = multer.diskStorage({
-  destination: 'uploads',
+  // destination: 'uploads',
   filename: function (req, file, cb) {
     const uniquePrefix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     cb(null, uniquePrefix + '-' + file.originalname);
@@ -36,7 +36,7 @@ app.post('/', upload.single('uploaded_file'), async function (req, res) {
     const files = await imagemin.default([filePath], {
       destination: 'compressed_images',
       plugins: [
-        imageminMozjpeg({ quality: 50 }), 
+        imageminMozjpeg({ quality: 5 }), 
         imageminPngquant({
           quality: [0.6, 0.8]
         })
